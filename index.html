@@ -4,68 +4,65 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Portfolio · Gabriel</title>
-<script src="https://accounts.google.com/gsi/client" async defer></script>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #080810;
-  --s1: #0e0e1a;
-  --s2: #16162a;
-  --s3: #1e1e38;
-  --border: #2a2a4a;
-  --border2: #353560;
-  --accent: #6366f1;
-  --accent2: #818cf8;
-  --green: #34d399;
-  --red: #f87171;
-  --yellow: #fbbf24;
-  --text: #e2e8f0;
-  --muted: #64748b;
-  --muted2: #94a3b8;
-  --font: 'Space Grotesk', sans-serif;
-  --mono: 'JetBrains Mono', monospace;
+:root{
+  --bg:#080810;--s1:#0e0e1a;--s2:#16162a;--border:#2a2a4a;--border2:#353560;
+  --accent:#6366f1;--accent2:#818cf8;--green:#34d399;--red:#f87171;
+  --text:#e2e8f0;--muted:#64748b;--muted2:#94a3b8;
+  --font:'Space Grotesk',sans-serif;--mono:'JetBrains Mono',monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;overflow-x:hidden;padding-bottom:80px}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.4}
+.glow{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0}
+.glow.a{width:400px;height:400px;background:rgba(99,102,241,.06);top:-100px;right:-100px}
+.glow.b{width:300px;height:300px;background:rgba(52,211,153,.04);bottom:100px;left:-80px}
 
-/* NOISE TEXTURE */
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.4}
+/* LOGIN */
+.login-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:40px 24px;text-align:center;position:relative;z-index:1}
+.login-logo{font-size:52px;margin-bottom:20px}
+.login-title{font-size:28px;font-weight:700;letter-spacing:-.5px;margin-bottom:8px}
+.login-sub{font-size:14px;color:var(--muted);line-height:1.6;max-width:280px;margin:0 auto 32px}
+.login-form{width:100%;max-width:300px;display:flex;flex-direction:column;gap:12px}
+.login-input{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:14px 16px;color:var(--text);font-family:var(--mono);font-size:16px;outline:none;text-align:center;letter-spacing:.15em;width:100%;transition:border-color .2s}
+.login-input:focus{border-color:var(--accent)}
+.login-btn{background:var(--accent);color:#fff;border:none;border-radius:12px;padding:14px;font-family:var(--font);font-size:15px;font-weight:700;cursor:pointer;width:100%;transition:opacity .2s}
+.login-btn:active{opacity:.85}
+.login-hint{font-size:11px;color:var(--muted);font-family:var(--mono)}
+.login-create{font-size:12px;color:var(--accent2);cursor:pointer;text-decoration:underline;margin-top:4px}
+.login-error{font-size:12px;color:var(--red);font-family:var(--mono);min-height:16px}
 
-/* GLOW */
-.glow-orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0}
-.glow-orb.a{width:400px;height:400px;background:rgba(99,102,241,0.06);top:-100px;right:-100px}
-.glow-orb.b{width:300px;height:300px;background:rgba(52,211,153,0.04);bottom:100px;left:-80px}
+/* LOADING */
+.loading-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:16px;position:relative;z-index:1}
+.spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{font-size:13px;color:var(--muted);font-family:var(--mono)}
 
 /* HEADER */
-.header{position:sticky;top:0;z-index:100;padding:16px 20px 12px;background:rgba(8,8,16,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.header{position:sticky;top:0;z-index:100;padding:14px 20px 10px;background:rgba(8,8,16,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
 .header-top{display:flex;justify-content:space-between;align-items:center}
-.header-brand{display:flex;flex-direction:column}
 .header-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-family:var(--mono)}
 .header-name{font-size:17px;font-weight:700;letter-spacing:-.3px}
-.header-right{display:flex;align-items:center;gap:10px}
-.sync-btn{display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:20px;background:var(--s2);border:1px solid var(--border);color:var(--muted2);font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
-.sync-btn.synced{border-color:var(--green);color:var(--green)}
-.sync-btn.error{border-color:var(--red);color:var(--red)}
-.sync-dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+.header-right{display:flex;align-items:center;gap:8px}
+.sync-btn{display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:20px;background:var(--s2);border:1px solid var(--border);color:var(--muted2);font-family:var(--font);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s}
+.sync-btn.ok{border-color:var(--green);color:var(--green)}
+.sync-btn.err{border-color:var(--red);color:var(--red)}
+.sync-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
 .sync-dot.pulse{animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.refresh-btn{width:34px;height:34px;border-radius:50%;background:var(--s2);border:1px solid var(--border);color:var(--muted2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
-.refresh-btn:active{transform:rotate(180deg)}
-.refresh-icon{font-size:14px}
+.refresh-btn{width:34px;height:34px;border-radius:50%;background:var(--s2);border:1px solid var(--border);color:var(--muted2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:transform .3s}
+.refresh-btn.spinning{animation:spin .8s linear infinite}
 
 /* NAV */
-.nav{display:flex;gap:6px;padding:10px 20px;overflow-x:auto;scrollbar-width:none;position:sticky;top:69px;z-index:99;background:rgba(8,8,16,0.9);backdrop-filter:blur(20px)}
-.nav::-webkit-scrollbar{display:none}
-.nav-btn{padding:7px 16px;border-radius:20px;font-family:var(--font);font-size:12px;font-weight:600;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;white-space:nowrap;transition:all .2s;letter-spacing:.02em}
-.nav-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.nav-wrap{position:sticky;top:63px;z-index:99;background:rgba(8,8,16,.92);backdrop-filter:blur(20px)}
 
 /* PAGES */
 .page{display:none;padding:0 20px;position:relative;z-index:1}
 .page.active{display:block}
 
 /* HERO */
-.hero{background:linear-gradient(135deg,var(--s1) 0%,var(--s2) 100%);border:1px solid var(--border);border-radius:20px;padding:22px;margin:14px 0;position:relative;overflow:hidden}
+.hero{background:linear-gradient(135deg,var(--s1),var(--s2));border:1px solid var(--border);border-radius:20px;padding:22px;margin:14px 0;position:relative;overflow:hidden}
 .hero::after{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(99,102,241,.12) 0%,transparent 70%);border-radius:50%}
 .hero-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-family:var(--mono);margin-bottom:4px}
 .hero-value{font-size:34px;font-weight:700;letter-spacing:-1.5px;font-family:var(--mono)}
@@ -77,8 +74,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .hero-stat span{font-size:14px;font-weight:700;font-family:var(--mono)}
 .hero-stat span.pos{color:var(--green)}
 .hero-stat span.neg{color:var(--red)}
-
-/* UPDATE BADGE */
 .last-update{font-size:10px;color:var(--muted);font-family:var(--mono);text-align:right;margin-top:6px}
 
 /* SECTION */
@@ -87,7 +82,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 /* ALLOC */
 .alloc-card{background:var(--s1);border:1px solid var(--border);border-radius:16px;padding:18px}
 .alloc-bar{height:10px;border-radius:5px;display:flex;overflow:hidden;gap:2px;margin-bottom:14px}
-.alloc-seg{height:100%;border-radius:2px;transition:width .5s ease}
+.alloc-seg{height:100%;border-radius:2px}
 .alloc-list{display:flex;flex-direction:column;gap:9px}
 .alloc-row{display:flex;justify-content:space-between;align-items:center}
 .alloc-left{display:flex;align-items:center;gap:8px}
@@ -99,13 +94,13 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 
 /* POSITIONS */
 .pos-list{display:flex;flex-direction:column;gap:8px}
-.pos-card{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:13px 15px;display:flex;justify-content:space-between;align-items:center;transition:border-color .15s;position:relative;overflow:hidden}
+.pos-card{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:13px 15px;display:flex;justify-content:space-between;align-items:center;position:relative;overflow:hidden}
 .pos-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px}
-.pos-card.pos-card-up::before{background:var(--green)}
-.pos-card.pos-card-down::before{background:var(--red)}
+.pos-card.up::before{background:var(--green)}
+.pos-card.dn::before{background:var(--red)}
 .pos-left{display:flex;align-items:center;gap:11px}
-.pos-icon{width:38px;height:38px;border-radius:10px;background:var(--s2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--accent2);flex-shrink:0;font-family:var(--mono);letter-spacing:-.5px}
-.pos-name{font-size:13px;font-weight:700;line-height:1.2}
+.pos-icon{width:38px;height:38px;border-radius:10px;background:var(--s2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--accent2);flex-shrink:0;font-family:var(--mono)}
+.pos-name{font-size:13px;font-weight:700}
 .pos-meta{font-size:10px;color:var(--muted);margin-top:2px;font-family:var(--mono)}
 .pos-right{text-align:right}
 .pos-val{font-family:var(--mono);font-size:14px;font-weight:600}
@@ -117,28 +112,28 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 /* FILTER */
 .filter-row{display:flex;gap:7px;margin-bottom:12px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
 .filter-row::-webkit-scrollbar{display:none}
-.chip{padding:6px 13px;border-radius:20px;font-size:11px;font-weight:600;font-family:var(--font);border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;white-space:nowrap;transition:all .15s;letter-spacing:.02em}
+.chip{padding:6px 13px;border-radius:20px;font-size:11px;font-weight:600;font-family:var(--font);border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;white-space:nowrap;transition:all .15s}
 .chip.active{background:var(--s2);border-color:var(--accent);color:var(--text)}
 
 /* FORM */
 .form-card{background:var(--s1);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px}
-.form-title{font-size:15px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.form-title{font-size:15px;font-weight:700;margin-bottom:14px}
 .form-group{margin-bottom:12px}
 .form-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;display:block;font-family:var(--mono)}
 .form-input,.form-select{width:100%;background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:11px 13px;color:var(--text);font-family:var(--mono);font-size:13px;outline:none;transition:border-color .15s;-webkit-appearance:none;appearance:none}
 .form-input:focus,.form-select:focus{border-color:var(--accent)}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.btn{width:100%;border:none;border-radius:11px;padding:13px;font-family:var(--font);font-size:14px;font-weight:700;cursor:pointer;transition:all .15s;margin-top:4px;letter-spacing:.02em}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.btn{width:100%;border:none;border-radius:11px;padding:13px;font-family:var(--font);font-size:14px;font-weight:700;cursor:pointer;transition:all .15s;margin-top:4px}
 .btn-primary{background:var(--accent);color:#fff}
 .btn-primary:active{opacity:.85;transform:scale(.99)}
 .btn-outline{background:transparent;color:var(--accent);border:1px solid var(--accent)}
 
 /* AI */
 .ai-box{background:linear-gradient(135deg,var(--s1),var(--s2));border:1px solid rgba(99,102,241,.25);border-radius:16px;padding:18px;margin-bottom:14px}
-.ai-header{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.ai-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
 .ai-title{font-size:13px;font-weight:700;color:var(--accent2)}
-.ai-status{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--green);font-family:var(--mono)}
-.ai-dot-live{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+.ai-live{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--green);font-family:var(--mono)}
+.ai-live-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
 .ai-sub{font-size:11px;color:var(--muted);margin-bottom:10px}
 .ai-msgs{min-height:70px;max-height:180px;overflow-y:auto;display:flex;flex-direction:column;gap:7px;margin-bottom:10px;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
 .ai-msg{padding:9px 11px;border-radius:10px;font-size:12px;line-height:1.55}
@@ -148,7 +143,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .ai-row{display:flex;gap:8px}
 .ai-input{flex:1;background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:9px 13px;color:var(--text);font-family:var(--font);font-size:12px;outline:none}
 .ai-input:focus{border-color:var(--accent)}
-.ai-send{background:var(--accent);color:#fff;border:none;border-radius:10px;width:38px;font-size:16px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.ai-send{background:var(--accent);color:#fff;border:none;border-radius:10px;width:38px;font-size:16px;cursor:pointer;flex-shrink:0}
 
 /* STATS */
 .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px}
@@ -157,8 +152,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .stat-value{font-size:17px;font-weight:700;font-family:var(--mono)}
 .stat-value.pos{color:var(--green)}
 .stat-value.neg{color:var(--red)}
-
-/* REALIZED */
 .realized-card{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:16px}
 .realized-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border)}
 .realized-row:last-child{border-bottom:none;padding-top:10px;margin-top:2px}
@@ -166,70 +159,64 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .realized-val{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--green)}
 .realized-total .realized-label{font-weight:700;color:var(--text);font-size:13px}
 .realized-total .realized-val{font-size:15px;font-weight:700}
-
-/* MOVEMENTS */
 .mov-card{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:7px;display:flex;justify-content:space-between;align-items:center}
-.mov-left{}
 .mov-type{font-size:12px;font-weight:700}
 .mov-date{font-size:10px;color:var(--muted);font-family:var(--mono);margin-top:2px}
 .mov-amount{font-family:var(--mono);font-size:13px;font-weight:600}
 .mov-amount.pos{color:var(--green)}
 .mov-amount.neg{color:var(--red)}
 
-/* LOGIN */
-.login-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:80vh;padding:40px 30px;text-align:center;position:relative;z-index:1}
-.login-logo{font-size:48px;margin-bottom:20px}
-.login-title{font-size:26px;font-weight:700;letter-spacing:-.5px;margin-bottom:8px}
-.login-sub{font-size:14px;color:var(--muted);line-height:1.6;max-width:280px;margin:0 auto 32px}
-.login-features{display:flex;flex-direction:column;gap:10px;margin-bottom:36px;text-align:left;width:100%;max-width:280px}
-.login-feat{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted2)}
-.login-feat span:first-child{font-size:16px}
-#googleSignInBtn{width:100%;max-width:280px}
-
-/* LOADING */
-.loading-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:80vh;gap:16px;position:relative;z-index:1}
-.spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.loading-text{font-size:13px;color:var(--muted);font-family:var(--mono)}
-
 /* TOAST */
 .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--s2);border:1px solid var(--border);color:var(--text);padding:9px 18px;border-radius:20px;font-size:12px;font-weight:600;opacity:0;transition:all .25s;z-index:999;white-space:nowrap;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.toast.success{border-color:var(--green);color:var(--green)}
-.toast.error{border-color:var(--red);color:var(--red)}
+.toast.ok{border-color:var(--green);color:var(--green)}
+.toast.err{border-color:var(--red);color:var(--red)}
 
 /* BOTTOM NAV */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(14,14,26,.95);backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;padding:8px 0 20px;z-index:200}
-.bnav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;color:var(--muted);font-family:var(--font);font-size:9px;font-weight:600;cursor:pointer;padding:4px 0;transition:color .15s;letter-spacing:.05em;text-transform:uppercase}
+.bnav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;color:var(--muted);font-family:var(--font);font-size:9px;font-weight:600;cursor:pointer;padding:4px 0;transition:color .15s;text-transform:uppercase;letter-spacing:.05em}
 .bnav-btn.active{color:var(--accent2)}
 .bnav-btn svg{width:20px;height:20px}
-
 .empty{text-align:center;color:var(--muted);padding:36px 0;font-size:13px;font-family:var(--mono)}
 </style>
 </head>
 <body>
-
-<div class="glow-orb a"></div>
-<div class="glow-orb b"></div>
+<div class="glow a"></div>
+<div class="glow b"></div>
 <div class="toast" id="toast"></div>
 
-<!-- LOGIN SCREEN -->
-<div id="loginScreen" style="display:none">
+<!-- LOGIN -->
+<div id="loginScreen">
   <div class="login-screen">
     <div class="login-logo">📈</div>
     <div class="login-title">Portfolio Tracker</div>
-    <div class="login-sub">I tuoi investimenti sincronizzati su tutti i dispositivi, con prezzi in tempo reale.</div>
-    <div class="login-features">
-      <div class="login-feat"><span>💾</span><span>Dati salvati su Google Drive</span></div>
-      <div class="login-feat"><span>📡</span><span>Prezzi aggiornati via Yahoo Finance</span></div>
-      <div class="login-feat"><span>🤖</span><span>Assistente AI integrato</span></div>
-      <div class="login-feat"><span>🔒</span><span>Solo tu puoi accedere ai tuoi dati</span></div>
+    <div class="login-sub">Inserisci il tuo PIN per accedere. I tuoi dati sono salvati nel cloud e accessibili da qualsiasi dispositivo.</div>
+    <div class="login-form">
+      <input class="login-input" id="pinInput" type="password" inputmode="numeric" maxlength="6" placeholder="• • • • • •" autocomplete="off"/>
+      <div class="login-error" id="loginError"></div>
+      <button class="login-btn" onclick="doLogin()">Accedi</button>
+      <div class="login-hint">Prima volta? <span class="login-create" onclick="showCreate()">Crea account</span></div>
     </div>
-    <div id="googleSignInBtn"></div>
   </div>
 </div>
 
-<!-- LOADING SCREEN -->
+<!-- CREATE -->
+<div id="createScreen" style="display:none">
+  <div class="login-screen">
+    <div class="login-logo">🔐</div>
+    <div class="login-title">Crea PIN</div>
+    <div class="login-sub">Scegli un PIN da 4-6 cifre. Usalo su tutti i dispositivi per accedere al tuo portafoglio.</div>
+    <div class="login-form">
+      <input class="login-input" id="newPin1" type="password" inputmode="numeric" maxlength="6" placeholder="Nuovo PIN"/>
+      <input class="login-input" id="newPin2" type="password" inputmode="numeric" maxlength="6" placeholder="Conferma PIN"/>
+      <div class="login-error" id="createError"></div>
+      <button class="login-btn" onclick="doCreate()">Crea account</button>
+      <div class="login-hint"><span class="login-create" onclick="showLogin()">← Torna al login</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- LOADING -->
 <div id="loadingScreen" style="display:none">
   <div class="loading-screen">
     <div class="spinner"></div>
@@ -237,52 +224,47 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   </div>
 </div>
 
-<!-- MAIN APP -->
+<!-- APP -->
 <div id="mainApp" style="display:none">
-
   <div class="header">
     <div class="header-top">
-      <div class="header-brand">
+      <div>
         <div class="header-label">Portfolio</div>
-        <div class="header-name" id="headerName">Gabriel Germin</div>
+        <div class="header-name">Gabriel Germin</div>
       </div>
       <div class="header-right">
-        <button class="sync-btn" id="syncBtn" onclick="syncDrive()">
+        <button class="sync-btn" id="syncBtn" onclick="manualSync()">
           <div class="sync-dot pulse" id="syncDot"></div>
           <span id="syncLabel">Sync</span>
         </button>
-        <button class="refresh-btn" onclick="refreshPrices()" title="Aggiorna prezzi">
-          <span class="refresh-icon" id="refreshIcon">↻</span>
-        </button>
+        <button class="refresh-btn" id="refreshBtn" onclick="refreshPrices()">↻</button>
       </div>
     </div>
   </div>
 
-  <!-- PAGE: DASHBOARD -->
+  <!-- DASHBOARD -->
   <div class="page active" id="page-dashboard">
     <div class="hero">
       <div class="hero-label">Valore Totale</div>
       <div class="hero-value" id="heroValue">—</div>
       <div><span class="hero-pl" id="heroPL">—</span></div>
       <div class="hero-grid">
-        <div class="hero-stat"><label>Investito</label><span id="heroInvested">—</span></div>
-        <div class="hero-stat"><label>Posizioni</label><span id="heroCount">—</span></div>
+        <div class="hero-stat"><label>Investito</label><span id="heroInv">—</span></div>
+        <div class="hero-stat"><label>Posizioni</label><span id="heroCnt">—</span></div>
         <div class="hero-stat"><label>Resa %</label><span id="heroPct">—</span></div>
       </div>
     </div>
-    <div class="last-update" id="lastUpdate">Prezzi non ancora aggiornati</div>
-
+    <div class="last-update" id="lastUpdate"></div>
     <div class="section-title">Allocazione</div>
     <div class="alloc-card">
       <div class="alloc-bar" id="allocBar"></div>
       <div class="alloc-list" id="allocList"></div>
     </div>
-
     <div class="section-title">Top Posizioni</div>
     <div class="pos-list" id="topPos"></div>
   </div>
 
-  <!-- PAGE: POSIZIONI -->
+  <!-- POSIZIONI -->
   <div class="page" id="page-positions">
     <div style="margin-top:14px">
       <div class="filter-row" id="filterRow"></div>
@@ -290,25 +272,23 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
     </div>
   </div>
 
-  <!-- PAGE: AGGIORNA -->
+  <!-- AGGIORNA -->
   <div class="page" id="page-update">
     <div style="margin-top:14px">
-
       <div class="ai-box">
         <div class="ai-header">
           <div class="ai-title">Assistente AI</div>
-          <div class="ai-status"><div class="ai-dot-live"></div>online</div>
+          <div class="ai-live"><div class="ai-live-dot"></div>online</div>
         </div>
         <div class="ai-sub">Chiedi analisi, confronti o consigli sul portafoglio</div>
         <div class="ai-msgs" id="aiMsgs">
-          <div class="ai-msg ai">Ciao! Sono aggiornato con il tuo portafoglio in tempo reale. Chiedimi qualsiasi cosa.</div>
+          <div class="ai-msg ai">Ciao Gabriel! Sono aggiornato con il tuo portafoglio. Chiedimi qualsiasi cosa.</div>
         </div>
         <div class="ai-row">
-          <input class="ai-input" id="aiInput" placeholder="es. Quale posizione sta andando meglio?" />
+          <input class="ai-input" id="aiInput" placeholder="es. Quale posizione sta andando meglio?"/>
           <button class="ai-send" onclick="sendAI()">↑</button>
         </div>
       </div>
-
       <div class="form-card">
         <div class="form-title">➕ Nuovo movimento</div>
         <div class="form-group">
@@ -328,10 +308,10 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
         </div>
         <div id="tickerGroup" class="form-group">
           <label class="form-label">Ticker Yahoo Finance</label>
-          <input class="form-input" id="opTicker" placeholder="es. NVDA, ISP.MI, BYD.F" autocomplete="off"/>
+          <input class="form-input" id="opTicker" placeholder="es. NVDA, ISP.MI, BYD.DE" autocomplete="off"/>
           <div style="font-size:10px;color:var(--muted);margin-top:4px;font-family:var(--mono)">Usato per aggiornare il prezzo automaticamente</div>
         </div>
-        <div id="qpGroup" class="form-row" style="margin-bottom:12px">
+        <div id="qpGroup" class="form-row">
           <div class="form-group" style="margin-bottom:0">
             <label class="form-label">Quantità</label>
             <input class="form-input" id="opQty" type="number" step="any" placeholder="0"/>
@@ -355,11 +335,10 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
         </div>
         <button class="btn btn-primary" onclick="addMovimento()">Aggiungi movimento</button>
       </div>
-
     </div>
   </div>
 
-  <!-- PAGE: STATS -->
+  <!-- STATS -->
   <div class="page" id="page-stats">
     <div style="margin-top:14px">
       <div class="stats-grid" id="statsGrid"></div>
@@ -368,12 +347,11 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
       <div class="section-title" style="margin-top:20px">Movimenti recenti</div>
       <div id="recentMovs"></div>
       <div style="margin-top:14px">
-        <button class="btn btn-outline" onclick="signOut()">Disconnetti account</button>
+        <button class="btn btn-outline" onclick="doLogout()">Disconnetti</button>
       </div>
     </div>
   </div>
-
-</div><!-- end mainApp -->
+</div>
 
 <!-- BOTTOM NAV -->
 <div class="bottom-nav" id="bottomNav" style="display:none">
@@ -397,12 +375,10 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 
 <script>
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
-const CLIENT_ID = '843431417535-vcijrfb2fssrvscllgik24pbnkeo9334.apps.googleusercontent.com';
-const SCOPES = 'https://www.googleapis.com/auth/drive.file';
-const FILE_NAME = 'portfolio_tracker_gabriel.json';
-const PROXY = 'https://query1.finance.yahoo.com/v8/finance/chart/';
+const SUPA_URL = 'https://humdtbedyjhezqsezocg.supabase.co';
+const SUPA_KEY = 'sb_publishable_6xYoLoVrD11McWf12MQ-lg_w4jsLg_j';
+const TABLE = 'portfolio';
 
-// ─── COLORS ──────────────────────────────────────────────────────────────────
 const CAT_COLORS = {
   'Tech':'#6366f1','ETF Globale':'#34d399','Finanza':'#fbbf24',
   'Emergenti':'#60a5fa','Tech/AI':'#a78bfa','Auto/EV':'#4ade80',
@@ -411,8 +387,7 @@ const CAT_COLORS = {
 };
 const COLORS = Object.values(CAT_COLORS);
 
-// ─── DEFAULT DATA ─────────────────────────────────────────────────────────────
-const DEFAULT = {
+const DEFAULT_DATA = {
   positions:[
     {id:1,name:'NVIDIA',ticker:'NVDA',category:'Tech',qty:16.111696,avgPrice:78.22,currentPrice:197.75,type:'Azione'},
     {id:2,name:'Core MSCI World',ticker:'IWDA.AS',category:'ETF Globale',qty:25.916571,avgPrice:84.55,currentPrice:121.09,type:'ETF'},
@@ -445,301 +420,265 @@ const DEFAULT = {
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
 let state = null;
-let tokenClient = null;
-let accessToken = null;
-let driveFileId = null;
-let currentUser = null;
+let currentPin = null;
 
-// ─── INIT ─────────────────────────────────────────────────────────────────────
-window.onload = function() {
-  document.getElementById('opData').value = new Date().toISOString().split('T')[0];
-  showScreen('loading', 'Inizializzazione...');
-
-  window.google?.accounts?.id?.initialize({
-    client_id: CLIENT_ID,
-    callback: handleGoogleSignIn,
-    auto_select: true,
-  });
-
-  tokenClient = window.google?.accounts?.oauth2?.initTokenClient({
-    client_id: CLIENT_ID,
-    scope: SCOPES,
-    callback: handleTokenResponse,
-  });
-
-  // Try silent sign-in
-  setTimeout(() => {
-    window.google?.accounts?.id?.prompt((notification) => {
-      if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-        showLoginScreen();
-      }
-    });
-    setTimeout(() => {
-      if (!currentUser) showLoginScreen();
-    }, 3000);
-  }, 800);
+// ─── SUPABASE ─────────────────────────────────────────────────────────────────
+const sbHeaders = {
+  'Content-Type':'application/json',
+  'apikey': SUPA_KEY,
+  'Authorization': `Bearer ${SUPA_KEY}`
 };
 
-function showLoginScreen() {
-  showScreen('login');
-  window.google?.accounts?.id?.renderButton(
-    document.getElementById('googleSignInBtn'),
-    {theme:'filled_black', size:'large', width:280, text:'signin_with', shape:'pill'}
-  );
+async function sbGet(pin) {
+  const r = await fetch(`${SUPA_URL}/rest/v1/${TABLE}?pin=eq.${pin}&select=data`, {headers: sbHeaders});
+  const d = await r.json();
+  return d?.[0]?.data || null;
 }
 
-function showScreen(name, loadingMsg) {
-  document.getElementById('loginScreen').style.display = name==='login' ? 'block' : 'none';
-  document.getElementById('loadingScreen').style.display = name==='loading' ? 'block' : 'none';
-  document.getElementById('mainApp').style.display = name==='app' ? 'block' : 'none';
-  document.getElementById('bottomNav').style.display = name==='app' ? 'flex' : 'none';
-  if (loadingMsg) document.getElementById('loadingText').textContent = loadingMsg;
+async function sbSave(pin, data) {
+  // Upsert
+  const r = await fetch(`${SUPA_URL}/rest/v1/${TABLE}`, {
+    method: 'POST',
+    headers: {...sbHeaders, 'Prefer': 'resolution=merge-duplicates'},
+    body: JSON.stringify({pin, data})
+  });
+  return r.ok || r.status === 201 || r.status === 200;
 }
 
-async function handleGoogleSignIn(response) {
-  const payload = parseJwt(response.credential);
-  currentUser = payload;
-  document.getElementById('headerName').textContent = payload.name || 'Utente';
-  showScreen('loading', 'Accesso a Google Drive...');
-  tokenClient.requestAccessToken({prompt:''});
+async function sbPinExists(pin) {
+  const r = await fetch(`${SUPA_URL}/rest/v1/${TABLE}?pin=eq.${pin}&select=pin`, {headers: sbHeaders});
+  const d = await r.json();
+  return Array.isArray(d) && d.length > 0;
 }
 
-async function handleTokenResponse(resp) {
-  if (resp.error) { showLoginScreen(); return; }
-  accessToken = resp.access_token;
-  showScreen('loading', 'Caricamento portafoglio...');
-  await loadFromDrive();
-  await refreshPrices();
-  showScreen('app');
-  renderAll();
-  toggleFields();
+// ─── AUTH ─────────────────────────────────────────────────────────────────────
+function showLogin() {
+  document.getElementById('loginScreen').style.display = 'block';
+  document.getElementById('createScreen').style.display = 'none';
+  document.getElementById('loadingScreen').style.display = 'none';
+  document.getElementById('mainApp').style.display = 'none';
+  document.getElementById('bottomNav').style.display = 'none';
+}
+function showCreate() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('createScreen').style.display = 'block';
+}
+function showLoading(msg) {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('createScreen').style.display = 'none';
+  document.getElementById('loadingScreen').style.display = 'block';
+  document.getElementById('loadingText').textContent = msg || 'Caricamento...';
+}
+function showApp() {
+  document.getElementById('loadingScreen').style.display = 'none';
+  document.getElementById('mainApp').style.display = 'block';
+  document.getElementById('bottomNav').style.display = 'flex';
 }
 
-function parseJwt(token) {
-  try { return JSON.parse(atob(token.split('.')[1])); } catch(e) { return {}; }
-}
-
-function signOut() {
-  window.google?.accounts?.id?.disableAutoSelect();
-  accessToken = null; currentUser = null; driveFileId = null; state = null;
-  showLoginScreen();
-}
-
-// ─── DRIVE ────────────────────────────────────────────────────────────────────
-async function loadFromDrive() {
+async function doLogin() {
+  const pin = document.getElementById('pinInput').value.trim();
+  if (pin.length < 4) { document.getElementById('loginError').textContent = 'PIN minimo 4 cifre'; return; }
+  document.getElementById('loginError').textContent = '';
+  showLoading('Accesso in corso...');
   try {
-    // Search for existing file
-    const search = await fetch(
-      `https://www.googleapis.com/drive/v3/files?q=name='${FILE_NAME}' and trashed=false&fields=files(id,name)`,
-      {headers:{Authorization:`Bearer ${accessToken}`}}
-    );
-    const sData = await search.json();
-    if (sData.files?.length > 0) {
-      driveFileId = sData.files[0].id;
-      const fileResp = await fetch(
-        `https://www.googleapis.com/drive/v3/files/${driveFileId}?alt=media`,
-        {headers:{Authorization:`Bearer ${accessToken}`}}
-      );
-      state = await fileResp.json();
-      setSyncStatus('synced', 'Sincronizzato');
-    } else {
-      state = JSON.parse(JSON.stringify(DEFAULT));
-      await saveToDrive();
+    const data = await sbGet(pin);
+    if (!data) {
+      showLogin();
+      document.getElementById('loginError').textContent = 'PIN non trovato. Creane uno nuovo.';
+      return;
     }
+    currentPin = pin;
+    state = data;
+    localStorage.setItem('portfolio_pin', pin);
+    showApp();
+    renderAll();
+    toggleFields();
+    refreshPrices().catch(console.error);
   } catch(e) {
-    state = JSON.parse(JSON.stringify(DEFAULT));
-    setSyncStatus('error', 'Offline');
+    showLogin();
+    document.getElementById('loginError').textContent = 'Errore connessione. Riprova.';
   }
 }
 
-async function saveToDrive() {
-  if (!accessToken) return;
+async function doCreate() {
+  const p1 = document.getElementById('newPin1').value.trim();
+  const p2 = document.getElementById('newPin2').value.trim();
+  const err = document.getElementById('createError');
+  if (p1.length < 4) { err.textContent = 'PIN minimo 4 cifre'; return; }
+  if (p1 !== p2) { err.textContent = 'I PIN non coincidono'; return; }
+  err.textContent = '';
+  showLoading('Creazione account...');
   try {
-    setSyncStatus('syncing', 'Salvataggio...');
-    const body = JSON.stringify(state);
-    const blob = new Blob([body], {type:'application/json'});
-    let url, method;
-    if (driveFileId) {
-      url = `https://www.googleapis.com/upload/drive/v3/files/${driveFileId}?uploadType=media`;
-      method = 'PATCH';
-    } else {
-      // Create file
-      const meta = await fetch('https://www.googleapis.com/drive/v3/files',{
-        method:'POST',
-        headers:{Authorization:`Bearer ${accessToken}`,'Content-Type':'application/json'},
-        body:JSON.stringify({name:FILE_NAME,mimeType:'application/json'})
-      });
-      const mData = await meta.json();
-      driveFileId = mData.id;
-      url = `https://www.googleapis.com/upload/drive/v3/files/${driveFileId}?uploadType=media`;
-      method = 'PATCH';
+    const exists = await sbPinExists(p1);
+    if (exists) {
+      document.getElementById('createScreen').style.display = 'block';
+      document.getElementById('loadingScreen').style.display = 'none';
+      err.textContent = 'PIN già in uso. Scegline un altro.';
+      return;
     }
-    await fetch(url,{method,headers:{Authorization:`Bearer ${accessToken}`,'Content-Type':'application/json'},body});
-    setSyncStatus('synced', 'Sincronizzato');
+    const ok = await sbSave(p1, JSON.parse(JSON.stringify(DEFAULT_DATA)));
+    if (!ok) throw new Error('Save failed');
+    currentPin = p1;
+    state = JSON.parse(JSON.stringify(DEFAULT_DATA));
+    localStorage.setItem('portfolio_pin', p1);
+    showApp();
+    renderAll();
+    toggleFields();
+    refreshPrices().catch(console.error);
   } catch(e) {
-    setSyncStatus('error', 'Errore sync');
+    showLogin();
+    document.getElementById('loginError').textContent = 'Errore creazione. Riprova.';
   }
 }
 
-async function syncDrive() {
-  showToast('Sincronizzazione...', '');
-  await saveToDrive();
-  showToast('Salvato su Google Drive ✓', 'success');
+function doLogout() {
+  localStorage.removeItem('portfolio_pin');
+  currentPin = null; state = null;
+  showLogin();
 }
 
-function setSyncStatus(status, label) {
+async function manualSync() {
+  showToast('Sincronizzazione...','');
+  await saveData();
+  showToast('Salvato ✓','ok');
+}
+
+async function saveData() {
+  if (!currentPin || !state) return;
+  try {
+    setSyncStatus('syncing','Salvataggio...');
+    const ok = await sbSave(currentPin, state);
+    setSyncStatus(ok ? 'ok' : 'err', ok ? 'Salvato' : 'Errore');
+  } catch(e) {
+    setSyncStatus('err','Offline');
+  }
+}
+
+function setSyncStatus(s, label) {
   const btn = document.getElementById('syncBtn');
   const dot = document.getElementById('syncDot');
-  const lbl = document.getElementById('syncLabel');
-  btn.className = 'sync-btn ' + (status==='synced'?'synced':status==='error'?'error':'');
-  dot.className = 'sync-dot' + (status==='syncing'?' pulse':'');
-  lbl.textContent = label;
+  btn.className = 'sync-btn' + (s==='ok'?' ok':s==='err'?' err':'');
+  dot.className = 'sync-dot' + (s==='syncing'?' pulse':'');
+  document.getElementById('syncLabel').textContent = label;
 }
 
 // ─── PRICES ───────────────────────────────────────────────────────────────────
 async function refreshPrices() {
-  const icon = document.getElementById('refreshIcon');
-  icon.style.animation = 'spin .8s linear infinite';
+  const btn = document.getElementById('refreshBtn');
+  btn.classList.add('spinning');
   let updated = 0, failed = [];
-
   for (const pos of state.positions) {
     if (!pos.ticker) continue;
     try {
       const price = await fetchPrice(pos.ticker);
-      if (price && price > 0) {
-        pos.currentPrice = price;
-        updated++;
-      } else {
-        failed.push(pos.name);
-      }
-    } catch(e) {
-      failed.push(pos.name);
-    }
-    await sleep(120); // rate limit
+      if (price && price > 0) { pos.currentPrice = price; updated++; }
+      else failed.push(pos.name);
+    } catch(e) { failed.push(pos.name); }
+    await sleep(150);
   }
-
   state.lastPriceUpdate = new Date().toISOString();
-  icon.style.animation = '';
-  await saveToDrive();
+  btn.classList.remove('spinning');
+  await saveData();
   renderAll();
-
-  if (failed.length === 0) {
-    showToast(`Prezzi aggiornati (${updated} titoli) ✓`, 'success');
-  } else {
-    showToast(`${updated} aggiornati, ${failed.length} non trovati`, '');
-  }
+  if (failed.length === 0) showToast(`${updated} prezzi aggiornati ✓`,'ok');
+  else showToast(`${updated} ok, ${failed.length} non trovati`,'');
 }
 
 async function fetchPrice(ticker) {
-  // Use a CORS proxy to fetch Yahoo Finance
-  const urls = [
-    `https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?interval=1d&range=1d`,
-    `https://query2.finance.yahoo.com/v8/finance/chart/${ticker}?interval=1d&range=1d`,
+  const proxies = [
+    `https://corsproxy.io/?url=${encodeURIComponent('https://query1.finance.yahoo.com/v8/finance/chart/'+ticker+'?interval=1d&range=1d')}`,
+    `https://api.allorigins.win/raw?url=${encodeURIComponent('https://query1.finance.yahoo.com/v8/finance/chart/'+ticker+'?interval=1d&range=1d')}`,
+    `https://corsproxy.io/?url=${encodeURIComponent('https://query2.finance.yahoo.com/v8/finance/chart/'+ticker+'?interval=1d&range=1d')}`,
   ];
-  for (const url of urls) {
+  for (const url of proxies) {
     try {
-      const r = await fetch(url, {headers:{'User-Agent':'Mozilla/5.0'}});
+      const r = await fetch(url);
+      if (!r.ok) continue;
       const d = await r.json();
       const price = d?.chart?.result?.[0]?.meta?.regularMarketPrice;
-      if (price) return price;
-    } catch(e) {}
+      if (price && price > 0) return price;
+    } catch(e) { continue; }
   }
   return null;
 }
 
-function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 // ─── COMPUTED ─────────────────────────────────────────────────────────────────
 const getVal = () => state.positions.reduce((s,p)=>s+p.qty*p.currentPrice,0);
 const getInv = () => state.positions.reduce((s,p)=>s+p.qty*p.avgPrice,0);
 const getPL = () => getVal()-getInv();
 const getPLPct = () => (getPL()/getInv())*100;
-
 function getAlloc() {
-  const total = getVal();
-  const byC = {};
-  state.positions.forEach(p => { byC[p.category]=(byC[p.category]||0)+p.qty*p.currentPrice; });
+  const total=getVal(), byC={};
+  state.positions.forEach(p=>{ byC[p.category]=(byC[p.category]||0)+p.qty*p.currentPrice; });
   return Object.entries(byC).map(([cat,val])=>({cat,val,pct:(val/total)*100})).sort((a,b)=>b.val-a.val);
 }
 
 // ─── FORMAT ───────────────────────────────────────────────────────────────────
 const fmt = n => n.toLocaleString('it-IT',{minimumFractionDigits:2,maximumFractionDigits:2});
 const fmtPct = n => (n>=0?'+':'')+n.toFixed(2)+'%';
-const fmtSmall = n => Math.abs(n)<1000 ? fmt(n) : (n/1000).toFixed(1)+'k';
 
 // ─── RENDER ───────────────────────────────────────────────────────────────────
-function renderAll() {
-  renderDashboard();
-  renderDatalist();
-}
+function renderAll() { renderDashboard(); renderDatalist(); }
 
 function renderDashboard() {
-  const val=getVal(), pl=getPL(), pct=getPLPct(), inv=getInv();
-  document.getElementById('heroValue').textContent = fmt(val)+' €';
-  document.getElementById('heroInvested').textContent = fmt(inv)+' €';
-  document.getElementById('heroCount').textContent = state.positions.length;
-  document.getElementById('heroPct').textContent = fmtPct(pct);
-  document.getElementById('heroPct').className = pct>=0?'pos':'neg';
-  const plEl = document.getElementById('heroPL');
-  plEl.textContent = (pl>=0?'▲ +':'▼ ')+fmt(Math.abs(pl))+' €';
-  plEl.className = 'hero-pl '+(pl>=0?'pos':'neg');
-
-  if (state.lastPriceUpdate) {
-    const d = new Date(state.lastPriceUpdate);
-    document.getElementById('lastUpdate').textContent = 'Aggiornato: '+d.toLocaleString('it-IT',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'short'});
+  const val=getVal(),pl=getPL(),pct=getPLPct(),inv=getInv();
+  document.getElementById('heroValue').textContent=fmt(val)+' €';
+  document.getElementById('heroInv').textContent=fmt(inv)+' €';
+  document.getElementById('heroCnt').textContent=state.positions.length;
+  const pctEl=document.getElementById('heroPct');
+  pctEl.textContent=fmtPct(pct); pctEl.className=pct>=0?'pos':'neg';
+  const plEl=document.getElementById('heroPL');
+  plEl.textContent=(pl>=0?'▲ +':'▼ ')+fmt(Math.abs(pl))+' €';
+  plEl.className='hero-pl '+(pl>=0?'pos':'neg');
+  if(state.lastPriceUpdate){
+    const d=new Date(state.lastPriceUpdate);
+    document.getElementById('lastUpdate').textContent='Aggiornato: '+d.toLocaleString('it-IT',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'short'});
   }
-
-  const alloc = getAlloc();
-  document.getElementById('allocBar').innerHTML = alloc.map((a,i)=>
+  const alloc=getAlloc();
+  document.getElementById('allocBar').innerHTML=alloc.map((a,i)=>
     `<div class="alloc-seg" style="width:${a.pct}%;background:${CAT_COLORS[a.cat]||COLORS[i%COLORS.length]}"></div>`
   ).join('');
-  document.getElementById('allocList').innerHTML = alloc.slice(0,6).map((a,i)=>{
-    const c = CAT_COLORS[a.cat]||COLORS[i%COLORS.length];
-    return `<div class="alloc-row">
-      <div class="alloc-left"><div class="alloc-dot" style="background:${c}"></div><span class="alloc-cat">${a.cat}</span></div>
-      <div class="alloc-r"><div class="alloc-pct">${a.pct.toFixed(1)}%</div><div class="alloc-val">${fmt(a.val)} €</div></div>
-    </div>`;
+  document.getElementById('allocList').innerHTML=alloc.slice(0,6).map((a,i)=>{
+    const c=CAT_COLORS[a.cat]||COLORS[i%COLORS.length];
+    return `<div class="alloc-row"><div class="alloc-left"><div class="alloc-dot" style="background:${c}"></div><span class="alloc-cat">${a.cat}</span></div><div class="alloc-r"><div class="alloc-pct">${a.pct.toFixed(1)}%</div><div class="alloc-val">${fmt(a.val)} €</div></div></div>`;
   }).join('');
-
-  const top = [...state.positions].sort((a,b)=>(b.qty*b.currentPrice)-(a.qty*a.currentPrice)).slice(0,5);
-  document.getElementById('topPos').innerHTML = top.map(posCard).join('');
+  const top=[...state.positions].sort((a,b)=>(b.qty*b.currentPrice)-(a.qty*a.currentPrice)).slice(0,5);
+  document.getElementById('topPos').innerHTML=top.map(posCard).join('');
 }
 
 function posCard(p) {
-  const val=p.qty*p.currentPrice, pl=(p.currentPrice-p.avgPrice)*p.qty, pct=((p.currentPrice-p.avgPrice)/p.avgPrice)*100;
-  const up = pl>=0;
-  return `<div class="pos-card ${up?'pos-card-up':'pos-card-down'}">
+  const val=p.qty*p.currentPrice,pl=(p.currentPrice-p.avgPrice)*p.qty,pct=((p.currentPrice-p.avgPrice)/p.avgPrice)*100;
+  return `<div class="pos-card ${pl>=0?'up':'dn'}">
     <div class="pos-left">
-      <div class="pos-icon">${p.ticker?.substring(0,4).toUpperCase()||'?'}</div>
-      <div>
-        <div class="pos-name">${p.name}</div>
-        <div class="pos-meta">${p.qty.toFixed(4)} pz · ${p.category}</div>
-      </div>
+      <div class="pos-icon">${(p.ticker||p.name).substring(0,4).toUpperCase()}</div>
+      <div><div class="pos-name">${p.name}</div><div class="pos-meta">${p.qty.toFixed(4)} pz · ${p.category}</div></div>
     </div>
     <div class="pos-right">
       <div class="pos-val">${fmt(val)} €</div>
-      <div class="pos-pl ${up?'pos':'neg'}">${up?'+':''}${fmt(pl)} € (${fmtPct(pct)})</div>
+      <div class="pos-pl ${pl>=0?'pos':'neg'}">${pl>=0?'+':''}${fmt(pl)} € (${fmtPct(pct)})</div>
       <div class="pos-price">${fmt(p.currentPrice)} €</div>
     </div>
   </div>`;
 }
 
 function renderPositions(filter='Tutti') {
-  let pos = [...state.positions];
-  if (filter!=='Tutti') pos=pos.filter(p=>p.category===filter);
+  let pos=[...state.positions];
+  if(filter!=='Tutti') pos=pos.filter(p=>p.category===filter);
   pos.sort((a,b)=>(b.qty*b.currentPrice)-(a.qty*a.currentPrice));
-  document.getElementById('allPos').innerHTML = pos.length ? pos.map(posCard).join('') : '<div class="empty">Nessuna posizione</div>';
+  document.getElementById('allPos').innerHTML=pos.length?pos.map(posCard).join(''):'<div class="empty">Nessuna posizione</div>';
 }
 
 function renderFilters() {
-  const cats = ['Tutti',...new Set(state.positions.map(p=>p.category))];
-  document.getElementById('filterRow').innerHTML = cats.map((c,i)=>
+  const cats=['Tutti',...new Set(state.positions.map(p=>p.category))];
+  document.getElementById('filterRow').innerHTML=cats.map((c,i)=>
     `<button class="chip ${i===0?'active':''}" onclick="filterPos('${c}',this)">${c}</button>`
   ).join('');
 }
 
 function filterPos(cat,btn) {
-  document.querySelectorAll('.filter-chip, .chip').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.chip').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   renderPositions(cat);
 }
@@ -761,27 +700,21 @@ function renderStats() {
   `;
   const recent=[...state.movements].reverse().slice(0,8);
   document.getElementById('recentMovs').innerHTML=recent.length
-    ? recent.map(m=>`<div class="mov-card">
-        <div class="mov-left"><div class="mov-type">${m.tipo}${m.titolo?' · '+m.titolo:''}</div><div class="mov-date">${m.data}</div></div>
-        <div class="mov-amount ${m.importo>=0?'pos':'neg'}">${m.importo>=0?'+':''}${fmt(m.importo)} €</div>
-      </div>`).join('')
-    : '<div class="empty">Nessun movimento</div>';
+    ?recent.map(m=>`<div class="mov-card"><div><div class="mov-type">${m.tipo}${m.titolo?' · '+m.titolo:''}</div><div class="mov-date">${m.data}</div></div><div class="mov-amount ${m.importo>=0?'pos':'neg'}">${m.importo>=0?'+':''}${fmt(m.importo)} €</div></div>`).join('')
+    :'<div class="empty">Nessun movimento</div>';
 }
 
 function renderDatalist() {
-  document.getElementById('titoliDL').innerHTML = state.positions.map(p=>`<option value="${p.name}">`).join('');
+  document.getElementById('titoliDL').innerHTML=state.positions.map(p=>`<option value="${p.name}">`).join('');
 }
 
 // ─── ACTIONS ──────────────────────────────────────────────────────────────────
 function toggleFields() {
   const t=document.getElementById('opType').value;
-  const showTit=['Acquisto','Vendita','Dividendo'].includes(t);
-  const showQP=['Acquisto','Vendita'].includes(t);
-  const showTicker=['Acquisto'].includes(t);
-  document.getElementById('titoloGroup').style.display=showTit?'':'none';
-  document.getElementById('tickerGroup').style.display=showTicker?'':'none';
-  document.getElementById('qpGroup').style.display=showQP?'':'none';
-  document.getElementById('importoGroup').style.display=showQP?'none':'';
+  document.getElementById('titoloGroup').style.display=['Acquisto','Vendita','Dividendo'].includes(t)?'':'none';
+  document.getElementById('tickerGroup').style.display=t==='Acquisto'?'':'none';
+  document.getElementById('qpGroup').style.display=['Acquisto','Vendita'].includes(t)?'':'none';
+  document.getElementById('importoGroup').style.display=['Acquisto','Vendita'].includes(t)?'none':'';
 }
 
 async function addMovimento() {
@@ -795,41 +728,22 @@ async function addMovimento() {
   const note=document.getElementById('opNote').value.trim();
   const totale=['Acquisto','Vendita'].includes(tipo)?qty*prezzo:importo;
 
-  if (tipo==='Acquisto'&&titolo) {
+  if(tipo==='Acquisto'&&titolo){
     let pos=state.positions.find(p=>p.name.toLowerCase()===titolo.toLowerCase());
-    if (pos) {
-      const nq=pos.qty+qty;
-      pos.avgPrice=(pos.qty*pos.avgPrice+qty*prezzo)/nq;
-      pos.qty=nq; pos.currentPrice=prezzo;
-      if (ticker) pos.ticker=ticker;
-    } else {
-      state.positions.push({id:state.nextId++,name:titolo,ticker,category:'Altro',qty,avgPrice:prezzo,currentPrice:prezzo,type:'Azione'});
-    }
-  } else if (tipo==='Vendita'&&titolo) {
+    if(pos){const nq=pos.qty+qty;pos.avgPrice=(pos.qty*pos.avgPrice+qty*prezzo)/nq;pos.qty=nq;pos.currentPrice=prezzo;if(ticker)pos.ticker=ticker;}
+    else state.positions.push({id:state.nextId++,name:titolo,ticker,category:'Altro',qty,avgPrice:prezzo,currentPrice:prezzo,type:'Azione'});
+  }else if(tipo==='Vendita'&&titolo){
     let pos=state.positions.find(p=>p.name.toLowerCase()===titolo.toLowerCase());
-    if (pos) {
-      state.realized.vendite+=(prezzo-pos.avgPrice)*qty;
-      pos.qty-=qty;
-      if (pos.qty<=0.0001) state.positions=state.positions.filter(p=>p.name!==pos.name);
-    }
-  } else if (tipo==='Versamento') {
-    state.versamenti+=importo;
-  } else if (tipo==='Dividendo') {
-    state.realized.dividendi+=importo;
-  } else if (tipo==='Interessi') {
-    state.realized.interessi+=importo;
-  }
+    if(pos){state.realized.vendite+=(prezzo-pos.avgPrice)*qty;pos.qty-=qty;if(pos.qty<=0.0001)state.positions=state.positions.filter(p=>p.name!==pos.name);}
+  }else if(tipo==='Versamento'){state.versamenti+=importo;
+  }else if(tipo==='Dividendo'){state.realized.dividendi+=importo;
+  }else if(tipo==='Interessi'){state.realized.interessi+=importo;}
 
   state.movements.push({tipo,titolo,qty,prezzo,importo:tipo==='Acquisto'?-totale:totale,data,note});
-  await saveToDrive();
+  await saveData();
   renderAll();
-  showToast('Movimento aggiunto ✓','success');
-  document.getElementById('opTitolo').value='';
-  document.getElementById('opTicker').value='';
-  document.getElementById('opQty').value='';
-  document.getElementById('opPrezzo').value='';
-  document.getElementById('opImporto').value='';
-  document.getElementById('opNote').value='';
+  showToast('Movimento aggiunto ✓','ok');
+  ['opTitolo','opTicker','opQty','opPrezzo','opImporto','opNote'].forEach(id=>document.getElementById(id).value='');
 }
 
 // ─── AI ───────────────────────────────────────────────────────────────────────
@@ -839,44 +753,29 @@ async function sendAI() {
   input.value='';
   const msgs=document.getElementById('aiMsgs');
   msgs.innerHTML+=`<div class="ai-msg user">${msg}</div>`;
-  const load=document.createElement('div'); load.className='ai-msg loading'; load.textContent='Analizzando...';
-  msgs.appendChild(load); msgs.scrollTop=msgs.scrollHeight;
-
+  const load=document.createElement('div');load.className='ai-msg loading';load.textContent='Analizzando...';
+  msgs.appendChild(load);msgs.scrollTop=msgs.scrollHeight;
   const val=getVal(),pl=getPL(),r=state.realized;
   const totalReal=r.vendite+r.dividendi+r.interessi+r.saveback;
   const posSummary=state.positions.map(p=>{
-    const pv=p.qty*p.currentPrice, ppl=(p.currentPrice-p.avgPrice)*p.qty;
-    return `${p.name}(${p.ticker}): ${p.qty.toFixed(3)}pz PMC=${p.avgPrice.toFixed(2)}€ attuale=${p.currentPrice.toFixed(2)}€ valore=${pv.toFixed(0)}€ PL=${ppl.toFixed(0)}€`;
+    const pv=p.qty*p.currentPrice,ppl=(p.currentPrice-p.avgPrice)*p.qty;
+    return `${p.name}(${p.ticker}): ${p.qty.toFixed(3)}pz PMC=${p.avgPrice.toFixed(2)}€ attuale=${p.currentPrice.toFixed(2)}€ val=${pv.toFixed(0)}€ PL=${ppl.toFixed(0)}€`;
   }).join('\n');
-
   try {
     const resp=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
-        system:`Sei l'assistente finanziario personale di Gabriel Germin. Analizza il portafoglio e rispondi in italiano, conciso e diretto. Non dare consigli finanziari definitivi.
-
-PORTAFOGLIO (prezzi live):
-Valore totale: ${fmt(val)}€ | P/L non realizzato: ${fmt(pl)}€ | Già incassato netto: +${fmt(totalReal)}€
-Versamenti: ${fmt(state.versamenti)}€ | Guadagno netto complessivo: ${fmt(val+totalReal-state.versamenti)}€
-
-POSIZIONI:
-${posSummary}
-
-Rispondi in 2-4 frasi max. Sii specifico e usa i numeri reali.`,
+        model:'claude-sonnet-4-20250514',max_tokens:1000,
+        system:`Sei l'assistente finanziario personale di Gabriel Germin. Rispondi in italiano, conciso e diretto. Non dare consigli definitivi.\n\nPORTAFOGLIO:\nValore: ${fmt(val)}€ | P/L: ${fmt(pl)}€ | Incassato: +${fmt(totalReal)}€ | Versato: ${fmt(state.versamenti)}€ | Guadagno netto: ${fmt(val+totalReal-state.versamenti)}€\n\nPOSIZIONI:\n${posSummary}\n\nRispondi in 2-4 frasi max.`,
         messages:[{role:'user',content:msg}]
       })
     });
     const d=await resp.json();
-    load.className='ai-msg ai'; load.textContent=d.content?.[0]?.text||'Errore risposta.';
-  } catch(e) { load.className='ai-msg ai'; load.textContent='Errore connessione.'; }
+    load.className='ai-msg ai';load.textContent=d.content?.[0]?.text||'Errore risposta.';
+  }catch(e){load.className='ai-msg ai';load.textContent='Errore connessione.';}
   msgs.scrollTop=msgs.scrollHeight;
 }
-document.addEventListener('DOMContentLoaded',()=>{
-  document.getElementById('aiInput')?.addEventListener('keydown',e=>{ if(e.key==='Enter') sendAI(); });
-});
 
 // ─── NAV ──────────────────────────────────────────────────────────────────────
 function showPage(name,btn) {
@@ -889,11 +788,35 @@ function showPage(name,btn) {
   if(name==='update') renderDatalist();
 }
 
-function showToast(msg, type='') {
+function showToast(msg,type='') {
   const t=document.getElementById('toast');
-  t.textContent=msg; t.className='toast show '+(type||'');
+  t.textContent=msg;t.className='toast show '+(type||'');
   setTimeout(()=>t.className='toast',2500);
 }
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+window.onload = async function() {
+  document.getElementById('opData').value=new Date().toISOString().split('T')[0];
+  document.getElementById('pinInput').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+  document.getElementById('newPin2').addEventListener('keydown',e=>{if(e.key==='Enter')doCreate();});
+  document.getElementById('aiInput').addEventListener('keydown',e=>{if(e.key==='Enter')sendAI();});
+
+  // Auto-login with saved PIN
+  const savedPin = localStorage.getItem('portfolio_pin');
+  if(savedPin){
+    showLoading('Accesso automatico...');
+    try{
+      const data=await sbGet(savedPin);
+      if(data){
+        currentPin=savedPin; state=data;
+        showApp(); renderAll(); toggleFields();
+        refreshPrices().catch(console.error);
+        return;
+      }
+    }catch(e){}
+  }
+  showLogin();
+};
 </script>
 </body>
 </html>
